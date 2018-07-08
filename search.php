@@ -7,13 +7,17 @@ $headtitle=$_GET["q"].'-'.SITE_NAME;;
 include("./header.php");
 $order=isset($_GET['order'])?$_GET['order']:'relevance';
 $order1=$order;
+$v = trim($_GET['q']);
 if(stripos($_GET['q'],'youtu.be')!==false || stripos($_GET['q'],'watch?v=')!==false ){
     preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $_GET['q'], $matches);
     $str='./watch.php?v='.$matches[1];
     header("Location:$str");
     exit();
+} else if (strlen($v)==11 && stripos($_v, ' ')===false){
+    $str='./watch.php?v='.$v;
+    header("Location:$str");
 }
-$q=urlencode($_GET["q"]);
+$q=urlencode($v);
 $type=isset($_GET['type'])?$_GET['type']:'video';
 if($type=='channel'){
 $order1='channel'; 
