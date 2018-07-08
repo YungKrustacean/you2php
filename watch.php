@@ -7,9 +7,9 @@ $videodata=get_video_info($_GET['v'],APIKEY);
 $headtitle=$videodata['items']['0']['snippet']['title'].' - '.SITE_NAME;
 include("./header.php"); 
 
-$v = trim($_GET['q']);
+$v = trim($_GET['v']);
 if($videodata['pageInfo']['totalResults'] == '0' && $videodata['pageInfo']['resultsPerPage']== '0'){
-    $str='./search.php?q='.$v;
+    $str='./search.php?ncr=1&q='.$v;
     header("Location: $str");
     exit();
 }

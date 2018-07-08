@@ -13,7 +13,7 @@ if(stripos($_GET['q'],'youtu.be')!==false || stripos($_GET['q'],'watch?v=')!==fa
     $str='./watch.php?v='.$matches[1];
     header("Location:$str");
     exit();
-} else if (strlen($v)==11 && stripos($_v, ' ')===false){
+} else if (empty($_GET['ncr']) && strlen($v)==11 && stripos($_v, ' ')===false){
     header("Location:./watch.php?v={$v}");
 }
 $q=urlencode($v);
