@@ -1,12 +1,18 @@
 <?php
 if(!is_array($_GET)&&count($_GET)<=0){
-       exit();
-    }
+    exit();
+}
 include("./lib.php");
 $headtitle=$_GET["q"].'-'.SITE_NAME;;
 include("./header.php");
 $order=isset($_GET['order'])?$_GET['order']:'relevance';
 $order1=$order;
+if(stripos($_GET['q'],'youtu.be')!==false || stripos($_GET['q'],'watch?v=')!==false ){
+    preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $_GET['q'], $matches);
+    $str='./watch.php?v='.$matches[1];
+    header("Location:$str");
+    exit();
+}
 $q=urlencode($_GET["q"]);
 $type=isset($_GET['type'])?$_GET['type']:'video';
 if($type=='channel'){

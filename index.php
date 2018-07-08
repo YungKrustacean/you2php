@@ -7,16 +7,20 @@ include("./lib.php");
 $headtitle='首页'.'-'.SITE_NAME;
 include("./header.php");
 if(isset($_GET['v'])){
+    $v = trim($_GET['v']);
     if(stripos($_GET['v'],'youtu.be')!==false || stripos($_GET['v'],'watch?v=')!==false ){
-     preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $_GET['v'], $matches);
-    $str='./watch.php?v='.$matches[1];
-     header("Location:$str");
-     exit();
-     }else{
-     $str='./search.php?q='.$_GET['v'];
-     header("Location: $str");
-     exit();
-}
+        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $_GET['v'], $matches);
+        $str='./watch.php?v='.$matches[1];
+        header("Location:$str");
+        exit();
+    }else if (strlen($v)==11 && stripos($_v, ' ')===false){
+        $str='./watch.php?v='.$v;
+        header("Location:$str");
+    }else{
+        $str='./search.php?q='.$_GET['v'];
+        header("Location: $str");
+        exit();
+    }
 }
 ?>
 <div class="container-fluid d-lg-none  d-md-none" style="background:#e62117">
