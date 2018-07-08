@@ -14,8 +14,7 @@ if(stripos($_GET['q'],'youtu.be')!==false || stripos($_GET['q'],'watch?v=')!==fa
     header("Location:$str");
     exit();
 } else if (strlen($v)==11 && stripos($_v, ' ')===false){
-    $str='./watch.php?v='.$v;
-    header("Location:$str");
+    header("Location:./watch.php?v={$v}");
 }
 $q=urlencode($v);
 $type=isset($_GET['type'])?$_GET['type']:'video';

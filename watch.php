@@ -1,21 +1,24 @@
 <?php
-    include('./lib.php');
-    if(!is_array($_GET)&&count($_GET)>0){
-        exit();
-    }
-    $videodata=get_video_info($_GET['v'],APIKEY);
-    $headtitle=$videodata['items']['0']['snippet']['title'].' - '.SITE_NAME;
-    include("./header.php"); 
-    if($videodata['pageInfo']['totalResults'] == '0' && $videodata['pageInfo']['resultsPerPage']== '0'){
-      header("Location: ./error.php");
-      exit();
-    }
-    //记录历史浏览观看记录
-    $tt=time()+1814400;
-    if(!isset($_COOKIE['history'])){
-     setcookie("history",$videodata['items']['0']['id'], $tt);   
-    }else{
-        
+include('./lib.php');
+if(!is_array($_GET)&&count($_GET)>0){
+    exit();
+}
+$videodata=get_video_info($_GET['v'],APIKEY);
+$headtitle=$videodata['items']['0']['snippet']['title'].' - '.SITE_NAME;
+include("./header.php"); 
+
+$v = trim($_GET['q']);
+if($videodata['pageInfo']['totalResults'] == '0' && $videodata['pageInfo']['resultsPerPage']== '0'){
+    $str='./search.php?q='.$v;
+    header("Location: $str");
+    exit();
+}
+//记录历史浏览观看记录
+$tt=time()+1814400;
+if(!isset($_COOKIE['history'])){
+    setcookie("history",$videodata['items']['0']['id'], $tt);   
+}else{
+
     $history=$_COOKIE['history'];
     $histmp=explode('@',$history);
     
