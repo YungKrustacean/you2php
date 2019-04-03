@@ -107,10 +107,12 @@ if (in_array($videodata['items']['0']['id'] ,$histmp)){
                 </div>
         <div id="tags" class="w-100 pb-2 vinfo">
 
-            <?php
+        <?php
+            if (isset($videodata['items'][0]['snippet']['tags'])) 
             foreach ($videodata['items'][0]['snippet']['tags'] as $v) {
                echo '<span><a href="./search.php?q='.$v.'" target="_blank">'.$v.'</a></span>';
-            }?>
+            }
+        ?>
 
         </div></div>
 
